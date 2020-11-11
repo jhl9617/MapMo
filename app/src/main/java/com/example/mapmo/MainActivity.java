@@ -1,6 +1,7 @@
 package com.example.mapmo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 
 import android.app.FragmentManager;
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         fragmentManager = getFragmentManager();
         mapFragment = (MapFragment)fragmentManager.findFragmentById(R.id.googleMap);
         mapFragment.getMapAsync(this);
+
+        AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, "todo-db").build();
+
     }
 
     @Override
@@ -39,7 +43,5 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.addMarker(markerOptions);
 
         googleMap.moveCamera((CameraUpdateFactory.newLatLngZoom(location, 16)));
-
-
     }
 }
